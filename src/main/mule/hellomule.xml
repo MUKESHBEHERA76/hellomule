@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="d59b7a68-be39-47d5-ad4b-471b6d1a0d1a" basePath="/helloProject" >
+		<http:listener-connection host="0.0.0.0" port="8081" readTimeout="5000" />
+	</http:listener-config>
+	<flow name="hellomuleFlow" doc:id="42f7f51d-9240-4d84-8415-29b7b321895c" >
+		<http:listener doc:name="Http Listener" doc:id="6857de98-ccf1-43b3-8433-bceb7c88b660" config-ref="HTTP_Listener_config" path="/hello" outputMimeType="text/plain" allowedMethods="GET"/>
+		<set-payload value="#['Welcome to MuleSoft training from Harmonigate.com']" doc:name="Set Payload" doc:id="51c23ee5-f63a-4eb7-a298-c9657c74af6a" />
+		<logger level="INFO" doc:name="Log the message sent to Http client." doc:id="1e518f47-de8c-4d03-a533-c009d73b90c2" message="#[payload]"/>
+	</flow>
+</mule>
